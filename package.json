@@ -1,0 +1,19 @@
+{
+  "name": "next-stencil-workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build:stencil": "npm run build -w stencil-library",
+    "dev": "npm run dev -w next-app",
+    "build": "npm run build:stencil && npm run build -w next-app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
