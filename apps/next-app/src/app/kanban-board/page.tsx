@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { DIRECTION_ENUM, KanbanTaskType, STATUS_ENUM } from "./KanbanBoardType";
 import { KanbanTask } from "react-library";
 
@@ -189,6 +189,7 @@ export default function KanbanBoard() {
         {headerItem?.map((headItem) => {
           return (
             <div
+              key={headItem.id}
               style={{
                 width: "300px",
                 border: `3px solid ${headItem.color}`,
@@ -202,13 +203,14 @@ export default function KanbanBoard() {
                 ?.filter((item) => item.status === headItem.status)
                 ?.map((task) => {
                   return (
-                    <KanbanTask
-                      task={task}
-                      key={task.id}
-                      handleChangeStatus={handleChangeStatus}
-                      handleDeleteTask={handleDeleteTask}
-                      handleEditTask={handleEditTask}
-                    />
+                    <React.Fragment key={task.id}>
+                      <KanbanTask
+                        task={task}
+                        handleChangeStatus={handleChangeStatus}
+                        handleDeleteTask={handleDeleteTask}
+                        handleEditTask={handleEditTask}
+                      />
+                    </React.Fragment>
                   );
                 })}
             </div>
