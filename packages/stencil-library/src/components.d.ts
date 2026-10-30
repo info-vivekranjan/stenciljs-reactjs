@@ -6,6 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface KanbanTask {
+        "handleChangeStatus": (id: number, status: STATUS_ENUM, direction: DIRECTION_ENUM) => void;
+        "handleDeleteTask": (id: number) => void;
+        "handleEditTask": (id: number, title: string) => void;
+        "task": KanbanTaskType;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -32,6 +38,12 @@ export interface MyCounterCustomEvent<T> extends CustomEvent<T> {
     target: HTMLMyCounterElement;
 }
 declare global {
+    interface HTMLKanbanTaskElement extends Components.KanbanTask, HTMLStencilElement {
+    }
+    var HTMLKanbanTaskElement: {
+        prototype: HTMLKanbanTaskElement;
+        new (): HTMLKanbanTaskElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -56,11 +68,18 @@ declare global {
         new (): HTMLMyCounterElement;
     };
     interface HTMLElementTagNameMap {
+        "kanban-task": HTMLKanbanTaskElement;
         "my-component": HTMLMyComponentElement;
         "my-counter": HTMLMyCounterElement;
     }
 }
 declare namespace LocalJSX {
+    interface KanbanTask {
+        "handleChangeStatus"?: (id: number, status: STATUS_ENUM, direction: DIRECTION_ENUM) => void;
+        "handleDeleteTask"?: (id: number) => void;
+        "handleEditTask"?: (id: number, title: string) => void;
+        "task"?: KanbanTaskType;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -93,6 +112,7 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "kanban-task": KanbanTask;
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
         "my-counter": Omit<MyCounter, keyof MyCounterAttributes> & { [K in keyof MyCounter & keyof MyCounterAttributes]?: MyCounter[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `attr:${K}`]?: MyCounterAttributes[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `prop:${K}`]?: MyCounter[K] };
     }
@@ -101,6 +121,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "kanban-task": LocalJSX.IntrinsicElements["kanban-task"] & JSXBase.HTMLAttributes<HTMLKanbanTaskElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-counter": LocalJSX.IntrinsicElements["my-counter"] & JSXBase.HTMLAttributes<HTMLMyCounterElement>;
         }

@@ -1,0 +1,27 @@
+.task-wrapper {
+    border: 1px solid orange;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.task-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.margin-top-0 {
+    margin-top: 0px;
+}

@@ -13,8 +13,20 @@ import React from 'react';
 
 import { type MyCounterCustomEvent } from "stencil-library";
 import type { Components } from "stencil-library/dist/components";
+import { KanbanTask as KanbanTaskElement, defineCustomElement as defineKanbanTask } from "stencil-library/dist/components/kanban-task.js";
 import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "stencil-library/dist/components/my-component.js";
 import { MyCounter as MyCounterElement, defineCustomElement as defineMyCounter } from "stencil-library/dist/components/my-counter.js";
+
+export type KanbanTaskEvents = NonNullable<unknown>;
+
+export const KanbanTask: StencilReactComponent<KanbanTaskElement, KanbanTaskEvents, Components.KanbanTask> = /*@__PURE__*/ createComponent<KanbanTaskElement, KanbanTaskEvents, Components.KanbanTask>({
+    tagName: 'kanban-task',
+    elementClass: KanbanTaskElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as KanbanTaskEvents,
+    defineCustomElement: defineKanbanTask
+});
 
 export type MyComponentEvents = NonNullable<unknown>;
 
