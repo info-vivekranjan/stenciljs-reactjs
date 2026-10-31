@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import ToastBox from "./ToastBox";
+import { ToastBox } from "react-library";
 
 enum TOAST_TYPE {
   SUCCESS = "success",

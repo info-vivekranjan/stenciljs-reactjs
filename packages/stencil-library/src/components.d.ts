@@ -38,6 +38,8 @@ export namespace Components {
         "initialCount": number;
     }
     interface ToastBox {
+        "handleDeleteToast": (id: number) => void;
+        "toast": TOAST_DATA_TYPE;
     }
 }
 export interface MyCounterCustomEvent<T> extends CustomEvent<T> {
@@ -128,6 +130,8 @@ declare namespace LocalJSX {
         "onCountChanged"?: (event: MyCounterCustomEvent<number>) => void;
     }
     interface ToastBox {
+        "handleDeleteToast"?: (id: number) => void;
+        "toast"?: TOAST_DATA_TYPE;
     }
 
     interface DialogBoxAttributes {
