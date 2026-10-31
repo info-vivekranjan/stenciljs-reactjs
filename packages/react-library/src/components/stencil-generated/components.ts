@@ -13,9 +13,21 @@ import React from 'react';
 
 import { type MyCounterCustomEvent } from "stencil-library";
 import type { Components } from "stencil-library/dist/components";
+import { DialogBox as DialogBoxElement, defineCustomElement as defineDialogBox } from "stencil-library/dist/components/dialog-box.js";
 import { KanbanTask as KanbanTaskElement, defineCustomElement as defineKanbanTask } from "stencil-library/dist/components/kanban-task.js";
 import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "stencil-library/dist/components/my-component.js";
 import { MyCounter as MyCounterElement, defineCustomElement as defineMyCounter } from "stencil-library/dist/components/my-counter.js";
+
+export type DialogBoxEvents = NonNullable<unknown>;
+
+export const DialogBox: StencilReactComponent<DialogBoxElement, DialogBoxEvents, Components.DialogBox> = /*@__PURE__*/ createComponent<DialogBoxElement, DialogBoxEvents, Components.DialogBox>({
+    tagName: 'dialog-box',
+    elementClass: DialogBoxElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as DialogBoxEvents,
+    defineCustomElement: defineDialogBox
+});
 
 export type KanbanTaskEvents = NonNullable<unknown>;
 

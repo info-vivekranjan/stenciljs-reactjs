@@ -1,0 +1,19 @@
+.dialog-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-box {
+  width: 350px;
+  background-color: wheat;
+  padding: 10px;
+  border: 2px solid black;
+}
+
+.margin-top-0 {
+  margin-top: 0;
+}

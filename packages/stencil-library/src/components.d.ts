@@ -6,6 +6,11 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface DialogBox {
+        "description": string;
+        "dialogTitle": string;
+        "handleClose": () => void;
+    }
     interface KanbanTask {
         "handleChangeStatus": (id: number, status: STATUS_ENUM, direction: DIRECTION_ENUM) => void;
         "handleDeleteTask": (id: number) => void;
@@ -38,6 +43,12 @@ export interface MyCounterCustomEvent<T> extends CustomEvent<T> {
     target: HTMLMyCounterElement;
 }
 declare global {
+    interface HTMLDialogBoxElement extends Components.DialogBox, HTMLStencilElement {
+    }
+    var HTMLDialogBoxElement: {
+        prototype: HTMLDialogBoxElement;
+        new (): HTMLDialogBoxElement;
+    };
     interface HTMLKanbanTaskElement extends Components.KanbanTask, HTMLStencilElement {
     }
     var HTMLKanbanTaskElement: {
@@ -68,12 +79,18 @@ declare global {
         new (): HTMLMyCounterElement;
     };
     interface HTMLElementTagNameMap {
+        "dialog-box": HTMLDialogBoxElement;
         "kanban-task": HTMLKanbanTaskElement;
         "my-component": HTMLMyComponentElement;
         "my-counter": HTMLMyCounterElement;
     }
 }
 declare namespace LocalJSX {
+    interface DialogBox {
+        "description"?: string;
+        "dialogTitle"?: string;
+        "handleClose"?: () => void;
+    }
     interface KanbanTask {
         "handleChangeStatus"?: (id: number, status: STATUS_ENUM, direction: DIRECTION_ENUM) => void;
         "handleDeleteTask"?: (id: number) => void;
@@ -102,6 +119,10 @@ declare namespace LocalJSX {
         "onCountChanged"?: (event: MyCounterCustomEvent<number>) => void;
     }
 
+    interface DialogBoxAttributes {
+        "dialogTitle": string;
+        "description": string;
+    }
     interface MyComponentAttributes {
         "first": string;
         "middle": string;
@@ -112,6 +133,7 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "dialog-box": Omit<DialogBox, keyof DialogBoxAttributes> & { [K in keyof DialogBox & keyof DialogBoxAttributes]?: DialogBox[K] } & { [K in keyof DialogBox & keyof DialogBoxAttributes as `attr:${K}`]?: DialogBoxAttributes[K] } & { [K in keyof DialogBox & keyof DialogBoxAttributes as `prop:${K}`]?: DialogBox[K] };
         "kanban-task": KanbanTask;
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
         "my-counter": Omit<MyCounter, keyof MyCounterAttributes> & { [K in keyof MyCounter & keyof MyCounterAttributes]?: MyCounter[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `attr:${K}`]?: MyCounterAttributes[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `prop:${K}`]?: MyCounter[K] };
@@ -121,6 +143,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "dialog-box": LocalJSX.IntrinsicElements["dialog-box"] & JSXBase.HTMLAttributes<HTMLDialogBoxElement>;
             "kanban-task": LocalJSX.IntrinsicElements["kanban-task"] & JSXBase.HTMLAttributes<HTMLKanbanTaskElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-counter": LocalJSX.IntrinsicElements["my-counter"] & JSXBase.HTMLAttributes<HTMLMyCounterElement>;
