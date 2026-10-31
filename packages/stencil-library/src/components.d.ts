@@ -37,6 +37,8 @@ export namespace Components {
          */
         "initialCount": number;
     }
+    interface ToastBox {
+    }
 }
 export interface MyCounterCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -78,11 +80,18 @@ declare global {
         prototype: HTMLMyCounterElement;
         new (): HTMLMyCounterElement;
     };
+    interface HTMLToastBoxElement extends Components.ToastBox, HTMLStencilElement {
+    }
+    var HTMLToastBoxElement: {
+        prototype: HTMLToastBoxElement;
+        new (): HTMLToastBoxElement;
+    };
     interface HTMLElementTagNameMap {
         "dialog-box": HTMLDialogBoxElement;
         "kanban-task": HTMLKanbanTaskElement;
         "my-component": HTMLMyComponentElement;
         "my-counter": HTMLMyCounterElement;
+        "toast-box": HTMLToastBoxElement;
     }
 }
 declare namespace LocalJSX {
@@ -118,6 +127,8 @@ declare namespace LocalJSX {
         "initialCount"?: number;
         "onCountChanged"?: (event: MyCounterCustomEvent<number>) => void;
     }
+    interface ToastBox {
+    }
 
     interface DialogBoxAttributes {
         "dialogTitle": string;
@@ -137,6 +148,7 @@ declare namespace LocalJSX {
         "kanban-task": KanbanTask;
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
         "my-counter": Omit<MyCounter, keyof MyCounterAttributes> & { [K in keyof MyCounter & keyof MyCounterAttributes]?: MyCounter[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `attr:${K}`]?: MyCounterAttributes[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `prop:${K}`]?: MyCounter[K] };
+        "toast-box": ToastBox;
     }
 }
 export { LocalJSX as JSX };
@@ -147,6 +159,7 @@ declare module "@stencil/core" {
             "kanban-task": LocalJSX.IntrinsicElements["kanban-task"] & JSXBase.HTMLAttributes<HTMLKanbanTaskElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-counter": LocalJSX.IntrinsicElements["my-counter"] & JSXBase.HTMLAttributes<HTMLMyCounterElement>;
+            "toast-box": LocalJSX.IntrinsicElements["toast-box"] & JSXBase.HTMLAttributes<HTMLToastBoxElement>;
         }
     }
 }

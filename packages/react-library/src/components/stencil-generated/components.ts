@@ -17,6 +17,7 @@ import { DialogBox as DialogBoxElement, defineCustomElement as defineDialogBox }
 import { KanbanTask as KanbanTaskElement, defineCustomElement as defineKanbanTask } from "stencil-library/dist/components/kanban-task.js";
 import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "stencil-library/dist/components/my-component.js";
 import { MyCounter as MyCounterElement, defineCustomElement as defineMyCounter } from "stencil-library/dist/components/my-counter.js";
+import { ToastBox as ToastBoxElement, defineCustomElement as defineToastBox } from "stencil-library/dist/components/toast-box.js";
 
 export type DialogBoxEvents = NonNullable<unknown>;
 
@@ -60,4 +61,15 @@ export const MyCounter: StencilReactComponent<MyCounterElement, MyCounterEvents,
     react: React,
     events: { onCountChanged: 'countChanged' } as MyCounterEvents,
     defineCustomElement: defineMyCounter
+});
+
+export type ToastBoxEvents = NonNullable<unknown>;
+
+export const ToastBox: StencilReactComponent<ToastBoxElement, ToastBoxEvents, Components.ToastBox> = /*@__PURE__*/ createComponent<ToastBoxElement, ToastBoxEvents, Components.ToastBox>({
+    tagName: 'toast-box',
+    elementClass: ToastBoxElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as ToastBoxEvents,
+    defineCustomElement: defineToastBox
 });
